@@ -1,0 +1,213 @@
+###2024.07.24 version one
+###Preprocessing and assembly 
+screen -S oral1 
+screen -r oral1
+ls ~/data/oral | wc -l   ##~/data/oral文件名字
+cd data/oral1
+ls > oral1.txt 
+sed -i 's/-T_combined_R1.fastq.gz//g' ~/data/oral/oral1/oral1.txt
+sed -i 's/-T _combined_R2.fastq.gz//g' ~/data/oral/oral1/oral1.txt
+sort -n ./oral1.txt |uniq >oral1_name.txt 
+
+sed -i 's/-T_combined_R1.fastq.gz//g' ~/data/oral/oral1.txt
+sed -i 's/-T_combined_R2.fastq.gz//g' ~/data/oral/oral1.txt
+sort -n ./oral1.txt |uniq >oral1_name.txt  
+cat ~/data/oral/oral1/oral1_name.txt | while read line; do python ~/viromepipe/run.py ~/data/oral/oral1/${line}-T_combined_R1.fastq.gz ~/data/oral/oral1/${line}-T_combined_R2.fastq.gz  -t 20 --host human -a 0 -o ~/data_output/oral/${line}_output ;done
+cat ~/data/gut/name_new.txt | while read line; do python ~viromepipe/run.py ~/data/gut/${line}-F_combined_R1.fastq.gz ~/data/gut/${line}-F_combined_R2.fastq.gz  -t 50 --host human -a 0 -o ~/dataoutput/gut/${line}_output ;done
+cat ~/data/oral/oral2/oral2_name.txt | while read line; do python ~/viromepipe/run.py ~/data/oral/oral2/${line}-T_combined_R1.fastq.gz ~/data/oral/oral2/${line}-T_combined_R2.fastq.gz  -t 10 --host human -a 0 -o ~/data_output/oral/${line}_output ;done
+cat ~/data/oral/oral3/oral3_name.txt | while read line; do python ~/viromepipe/run.py ~/data/oral/oral3/${line}-T_combined_R1.fastq.gz ~/data/oral/oral3/${line}-T_combined_R2.fastq.gz  -t 10 --host human -a 0 -o ~/data_output/oral/${line}_output ;done
+cat ~/data/oral/oral4/oral4_name.txt | while read line; do python ~/viromepipe/run.py ~/data/oral/oral4/${line}-T_combined_R1.fastq.gz ~/data/oral/oral4/${line}-T_combined_R2.fastq.gz  -t 10 --host human -a 0 -o ~/data_output/oral/${line}_output ;done
+cat ~/data/oral/oral5/oral5_name.txt | while read line; do python ~/viromepipe/run.py ~/data/oral/oral5/${line}-T_combined_R1.fastq.gz ~/data/oral/oral5/${line}-T_combined_R2.fastq.gz  -t 10 --host human -a 0 -o ~/data_output/oral/${line}_output ;done
+cat ~/data/oral/oral6/oral6_name.txt | while read line; do python ~/viromepipe/run.py ~/data/oral/oral6/${line}-T_combined_R1.fastq.gz ~/data/oral/oral6/${line}-T_combined_R2.fastq.gz  -t 10 --host human -a 0 -o ~/data_output/oral/${line}_output ;done
+rm -r ./output/*/2.trim 
+ls > gut5.txt
+
+sed -i 's/-F_combined_R1.fastq.gz//g' ~/data/gut/gut5/gut5.txt
+sed -i 's/-F_combined_R2.fastq.gz//g' ~/data/gut/gut5/gut5.txt
+sort -n ./gut5.txt |uniq >gut5_name.txt
+cat ~/data/gut/gut5/gut5_name.txt | while read line; do python ~/viromepipe/run.py ~/data/gut/gut5/${line}-F_combined_R1.fastq.gz ~/data/gut/gut5/${line}-F_combined_R2.fastq.gz  -t 10 --host human -a 0 -o ~/data_output/gut/${line}_output ;done
+
+conda activate viromepipe
+ls > gut6.txt
+sed -i 's/-F_combined_R1.fastq.gz//g' ~/data/gut/gut6/gut6.txt
+sed -i 's/-F_combined_R2.fastq.gz//g' ~/data/gut/gut6/gut6.txt
+sort -n ./gut6.txt |uniq >gut6_name.txt
+cat ~/data/gut/gut6/gut6_name.txt | while read line; do python ~/viromepipe/run.py ~/data/gut/gut6/${line}-F_combined_R1.fastq.gz ~/data/gut/gut6/${line}-F_combined_R2.fastq.gz  -t 10 --host human -a 0 -o ~/data_output/gut/${line}_output ;done
+ls > gut4.txt
+sed -i 's/-F_combined_R1.fastq.gz//g' ~/data/gut/gut4/gut4.txt
+sed -i 's/-F_combined_R2.fastq.gz//g' ~/data/gut/gut4/gut4.txt
+sort -n ./gut4.txt |uniq >gut4_name.txt
+cat ~/data/gut/gut4/gut4_name.txt | while read line; do python ~/viromepipe/run.py ~/data/gut/gut4/${line}-F_combined_R1.fastq.gz ~/data/gut/gut4/${line}-F_combined_R2.fastq.gz  -t 10 --host human -a 0 -o ~/data_output/gut/${line}_output ;done
+cat id.txt |while read id;do mv /media/home/xutiansong/data_output/oral/${id}/11.high_quality/contigs.fa /media/home/xutiansong/data_output/oral/${id}/11.high_quality/${id}_contigs.fa;done 
+
+
+ls > id.txt
+cat id.txt |while read id;do mv /media/home/xutiansong/data_output/oral/${id}/11.high_quality/contigs.fa /media/home/xutiansong/data_output/oral/${id}/11.high_quality/${id}_contigs.fa;done
+cat id.txt|while read id;do mv /media/home/xutiansong/data_output/oral/${id}/11.high_quality/${id}_contigs.fa /media/home/xutiansong/data_output/oralviral;done
+cd /media/home/xutiansong/data_output/oralviral 
+cat * > oralviral.fa 合并这些文件夹
+
+##vesearch
+vsearch --cluster_fast oralviral.fa --id 0.995 --centroids centroids.fasta --uc clusters.uc --maxseqlength -1 --threads 55
+
+##blast
+cd /media/home/xutiansong/viromepipe/blastn_database
+blastn -query /media/home/xutiansong/data_output/oralviral/oralviral.fa -db ncbi -num_threads 20 -max_target_seqs 1 -outfmt "6 qseqid sseqid pident evalue qcovs nident qlen slen length mismatch positive ppos gapopen gaps qstart qend sstart send bitscore qcovhsp qcovus qseq sstrand frames " -out /media/home/xutiansong/data_output/oralviral/blastn_total_refseq
+##ncbi database
+blastn -query /media/home/xutiansong/data_output/gutviral/gutviral.fa -db ncbi -num_threads 20 -max_target_seqs 1 -outfmt "6 qseqid sseqid pident evalue qcovs nident qlen slen length mismatch positive ppos gapopen gaps qstart qend sstart send bitscore qcovhsp qcovus qseq sstrand frames " -out /media/home/xutiansong/data_output/gutviral/blastn_total_refseq
+
+setwd("c:\\Users/Lenovo/Desktop")
+a <- read.table("blastn_total_refseq",header=F)
+colnames(a) <- c("qseqid","sseqid","pident","evalue","qcovs","nident","qlen","slen","length","mismatch","positive","ppos","gapopen","gaps","qstart","qend","sstart","send","bitscore","qcovhsp","qcovus","qseq","sstrand","frames")
+a <- subset(a,a$evalue<=1e-10 & a$pident>=50 & a$qcovs>=80)
+
+##Building a database
+makeblastdb -in EVRD.fasta -dbtype nucl -title evrd -out evrd -logfile evrd_log
+
+screen -S oralbowtie2
+conda activate viromepipe
+bowtie2-build centroids.fasta centroids ## bulid index
+cd /media/home/xutiansong/data_output/oral
+sed -i 's/data_output//g' ~/data_output/oral/id1.txt
+cat /media/home/xutiansong/data_output/oral/id.txt | while read id;do bowtie2 -x /media/home/xutiansong/data_output/oralbowtie2/centroids -1 /media/home/xutiansong/data_output/oral/${id}_output/3.bowtie2/${id}-T_combined_R1.fastq -2 /media/home/xutiansong/data_output/oral/${id}_output/3.bowtie2/${id}-T_combined_R2.fastq -S /media/home/xutiansong/data_output/oralbowtie2/${id}.sam --threads 20 ;done 
+cat /media/home/xutiansong/data_output/oral/id.txt | while read id;do samtools view -Sb /media/home/xutiansong/data_output/oralbowtie2/${id}.sam > /media/home/xutiansong/data_output/oralbowtie2/nonSortedbam/${id}.nonSorted.bam -@ 20;done 
+cat /media/home/xutiansong/data_output/oral/id.txt | while read id;do samtools sort /media/home/xutiansong/data_output/oralbowtie2/nonSortedbam/${id}.nonSorted.bam -o /media/home/xutiansong/data_output/oralbowtie2/Sortedbam/${id}.Sorted.bam -@ 20;done 
+
+cat /media/home/xutiansong/data_output/oral/id.txt | while read id;do samtools rmdup -s /media/home/xutiansong/data_output/oralbowtie2/Sortedbam/${id}.Sorted.bam /media/home/xutiansong/data_output/oralbowtie2/bam1/${id}.bam ;done
+cat /media/home/xutiansong/data_output/oral/id.txt |while read id;do mkdir /media/home/xutiansong/data_output/oralbowtie2/bam1/$id ;done
+cat /media/home/xutiansong/data_output/oral/id.txt | while read id; do mv /media/home/xutiansong/data_output/oralbowtie2/bam1/${id}.bam /media/home/xutiansong/data_output/oralbowtie2/bam1/${id} ;done
+cat /media/home/xutiansong/data_output/oral/id.txt | while read id; do mv /media/home/xutiansong/data_output/oralbowtie2/bam1/${id}/${id}.bam /media/home/xutiansong/data_output/oralbowtie2/bam1/${id}/rmdup.bam ;done
+cat /media/home/xutiansong/data_output/oral/id.txt | while read id;do samtools index /media/home/xutiansong/data_output/oralbowtie2/bam1/${id}/rmdup.bam -@ 50;done
+cat /media/home/xutiansong/data_output/oral/id.txt | while read id;do samtools idxstats /media/home/xutiansong/data_output/oralbowtie2/bam1/${id}/rmdup.bam > /media/home/xutiansong/data_output/oralbowtie2/read/${id}.read  -@ 20;done
+
+screen -S gutbowtie2
+conda activate viromepipe
+bowtie2-build centroids.fasta centroids ##bulid index
+
+cd /media/home/xutiansong/data_output/gut
+sed -i 's/data_output//g' ~/data_output/gut/id.txt
+cat /media/home/xutiansong/data_output/gut/id.txt | while read id;do bowtie2 -x /media/home/xutiansong/data_output/gutbowtie2/centroids -1 /media/home/xutiansong/data_output/gut/${id}_output/3.bowtie2/${id}-T_combined_R1.fastq -2 /media/home/xutiansong/data_output/gut/${id}_output/3.bowtie2/${id}-T_combined_R2.fastq -S /media/home/xutiansong/data_output/gutbowtie2/${id}.sam --threads 20 ;done
+cat /media/home/xutiansong/data_output/gut/id.txt | while read id;do samtools view -Sb /media/home/xutiansong/data_output/gutbowtie2/${id}.sam > /media/home/xutiansong/data_output/gutbowtie2/nonSortedbam/${id}.nonSorted.bam -@ 20;done
+cat /media/home/xutiansong/data_output/gut/id.txt | while read id;do samtools sort /media/home/xutiansong/data_output/gutbowtie2/nonSortedbam/${id}.nonSorted.bam -o /media/home/xutiansong/data_output/gutbowtie2/Sortedbam/${id}.Sorted.bam -@ 20;done
+cat /media/home/xutiansong/data_output/gut/id.txt | while read id;do samtools rmdup -s /media/home/xutiansong/data_output/gutbowtie2/Sortedbam/${id}.Sorted.bam /media/home/xutiansong/data_output/gutbowtie2/bam1/${id}.bam ;done
+cat /media/home/xutiansong/data_output/gut/id.txt |while read id;do mkdir /media/home/xutiansong/data_output/gutbowtie2/bam1/$id ;done
+cat /media/home/xutiansong/data_output/gut/id.txt | while read id; do mv /media/home/xutiansong/data_output/gutbowtie2/bam1/${id}.bam /media/home/xutiansong/data_output/gutbowtie2/bam1/${id} ;done
+cat /media/home/xutiansong/data_output/gut/id.txt | while read id; do mv /media/home/xutiansong/data_output/gutbowtie2/bam1/${id}/${id}.bam /media/home/xutiansong/data_output/gutbowtie2/bam1/${id}/rmdup.bam ;done
+cat /media/home/xutiansong/data_output/gut/id.txt | while read id;do samtools index /media/home/xutiansong/data_output/gutbowtie2/bam1/${id}/rmdup.bam -@ 50;done
+cat /media/home/xutiansong/data_output/gut/id.txt | while read id;do samtools idxstats /media/home/xutiansong/data_output/gutbowtie2/bam1/${id}/rmdup.bam > /media/home/xutiansong/data_output/gutbowtie2/read/${id}.read  -@ 20;done
+
+screen -S oralviral96
+conda activate viromepipe
+cd /media/home/xutiansong/data_output/oral
+
+ls > id.txt
+cat id.txt |while read id;do mv /media/home/xutiansong/data_output/oral/${id}/9.final-contigs/contigs.fa /media/home/xutiansong/data_output/oral/${id}/9.final-contigs /${id}_contigs.fa;done
+cat id.txt|while read id;do mv /media/home/xutiansong/data_output/oral/${id}/9.final-contigs/${id}_contigs.fa  /media/home/xutiansong/data_output/oralviral9_contigs;done
+cd /media/home/xutiansong/data_output/oralviral9_contigs 
+cat * > oralviral9.fa 
+cat oralviral9.fa |grep ">" -c
+
+vsearch --cluster_fast oralviral9.fa --id 0.995 --centroids centroids.fasta --uc clusters.uc --maxseqlength -1 --threads 55
+ls /media/home/xutiansong/data_output/oralviral9_contigs/centroids.fasta | wc -l  
+cat centroids.fasta |grep ">" -c
+
+screen -r oralviral96
+bowtie2-build centroids.fasta centroids 
+cd /media/home/xutiansong/data_output/oral
+
+ls > id1.txt 
+sed -i 's/_output//g' ~/data_output/oral/id1.txt
+cd /media/home/xutiansong/data_output/oralviral9_contigs 
+
+##bulid sam file
+cat /media/home/xutiansong/data_output/oral/id1.txt | while read id;do bowtie2 -x /media/home/xutiansong/data_output/oralviral9_contigs/centroids -1 /media/home/xutiansong/data_output/oral/${id}_output/3.bowtie2/${id}-T_combined_R1.fastq -2 /media/home/xutiansong/data_output/oral/${id}_output/3.bowtie2/${id}-T_combined_R2.fastq -S /media/home/xutiansong/data_output/oralviral9_contigs/sam/${id}.sam --threads 20 ;done 
+##bulid nonSortedbam file
+cat /media/home/xutiansong/data_output/oral/id1.txt | while read id;do samtools view -Sb /media/home/xutiansong/data_output/oralviral9_contigs/${id}.sam > /media/home/xutiansong/data_output/oralviral9_contigs/nonSortedbam/${id}.nonSorted.bam -@ 20;done 
+##bulid Sortedbam file
+cat /media/home/xutiansong/data_output/oral/id1.txt | while read id;do samtools sort /media/home/xutiansong/data_output/oralviral9_contigs/nonSortedbam/${id}.nonSorted.bam -o /media/home/xutiansong/data_output/oralviral9_contigs/Sortedbam/${id}.Sorted.bam -@ 20;done ##9月24日下午19点运行第一次
+##bulid bam1 file 
+cat /media/home/xutiansong/data_output/oral/id1.txt | while read id;do samtools rmdup -s /media/home/xutiansong/data_output/oralviral9_contigs/Sortedbam/${id}.Sorted.bam /media/home/xutiansong/data_output/oralviral9_contigs/bam1/${id}.bam ;done 
+cat /media/home/xutiansong/data_output/oral/id1.txt |while read id;do mkdir /media/home/xutiansong/data_output/oralviral9_contigs/bam1/$id ;done
+cat /media/home/xutiansong/data_output/oral/id1.txt | while read id; do mv /media/home/xutiansong/data_output/oralviral9_contigs/bam1/${id}.bam /media/home/xutiansong/data_output/oralviral9_contigs/bam1/${id} ;done
+##Rename file
+cat /media/home/xutiansong/data_output/oral/id1.txt | while read id; do mv /media/home/xutiansong/data_output/oralviral9_contigs/bam1/${id}/${id}.bam /media/home/xutiansong/data_output/oralviral9_contigs/bam1/${id}/rmdup.bam ;done
+cat /media/home/xutiansong/data_output/oral/id1.txt | while read id;do samtools index /media/home/xutiansong/data_output/oralviral9_contigs/bam1/${id}/rmdup.bam -@ 50;done
+##bulid read file
+cat /media/home/xutiansong/data_output/oral/id1.txt | while read id;do samtools idxstats /media/home/xutiansong/data_output/oralviral9_contigs/bam1/${id}/rmdup.bam > /media/home/xutiansong/data_output/oralviral9_contigs/read/${id}.read  -@ 20;done
+cat /media/home/xutiansong/data_output/oral/id.txt |while read id;do mv /media/home/xutiansong/data_output/oral/${id}/10.checkv/quality_summary.tsv /media/home/xutiansong/data_output/oral/${id}/10.checkv/${id}_quality_summary.tsv ;done
+
+###checkv
+cat /media/home/xutiansong/data_output/oral/id.txt |while read id;do mv /media/home/xutiansong/data_output/oral/${id}/10.checkv/${id}_quality_summary.tsv  /media/home/xutiansong/data_output/oralcheckquality ;done
+cd /media/home/xutiansong/data_output/oralcheckquality 
+cat ./* > ./all_checkvquality.txt
+
+##Human oral eukaryotic viruses
+screen -S oralviralzhen96
+screen -r oralviralzhen96
+conda activate viromepipe
+cat /media/home/xutiansong/data_output/oral/id.txt |while read id;do vsearch --sortbylength /media/home/xutiansong/data_output/oral/${id}/5.spades/scaffolds.fasta --minseqlength 500 --maxseqlength -1 --output /media/home/xutiansong/data_output/oralzhen/${id}_contig_500.fasta ;done
+
+cat /media/home/xutiansong/data_output/oral/id.txt | while read line; do blastn -query /media/home/xutiansong/data_output/oralzhen/${line}_contig_500.fasta -db ~/NR_NT/nt.gz/nt -outfmt "6 qseqid sseqid pident nident qlen slen length mismatch positive ppos gapopen gaps qstart qend sstart send evalue bitscore qcovs qcovhsp qcovus qseq sstrand frames " -num_threads 10 -max_target_seqs 1 -out /media/home/xutiansong/data_output/oralzhen1/${line}.wgs1.blast ;done
+#ani_cluster
+1.Perform all-vs-all BLAST using megablast utility
+makeblastdb -in oralphage0124.fasta -out blastdb -dbtype nucl
+blastn -query oralphage0124.fasta -db blastdb -out blast.tsv -outfmt '6 std qlen slen' -max_target_seqs 25000 -perc_identity 90
+
+2. Compute ANI from BLAST results 根据 BLAST 结果计算 ANI
+python blastani.py -i blast.tsv -o ani.tsv
+
+3. Perform centroid-based clustering 执行基于质心的聚类
+python cluster.py --fna oralphage0124.fasta --ani ani.tsv --out clusters.tsv --min_ani 95 --min_qcov 0 --min_tcov 85
+
+seqtk subseq ./oralphage0124.fasta  ./24440.txt  >  oralphageOTU0124.fasta
+grep ">" ./oralphageOTU0124.fasta | wc -l
+prodigal -i  oralphageOTU0124.fasta -o oralphageOTU0124.genes -a oralphageOTU0124.faa -p meta
+
+#aai_cluster
+1. Make DIAMOND database 
+diamond makedb --in oralphageOTU0124.faa --db viral_proteins --threads 10
+
+2. Perform all-vs-all BLASTP 
+diamond blastp --query oralphageOTU0124.faa --db viral_proteins --out blastp0124.tsv --outfmt 6 --evalue 1e-5 --max-target-seqs 10000 --query-cover 50 --subject-cover 50
+
+3. Compute AAI from BLAST results 
+python amino_acid_identity.py --in_faa oralphageOTU0124.faa --in_blast blastp0124.tsv --out_tsv aai.tsv
+
+4. Filter edges and prepare MCL input
+python filter_aai.py --in_aai aai.tsv --min_percent_shared 20 --min_num_shared 16 --min_aai 40 --out_tsv genus_edges.tsv
+python filter_aai.py --in_aai aai.tsv --min_percent_shared 10 --min_num_shared 8 --min_aai 20 --out_tsv family_edges.tsv
+
+Perform MCL-based clustering 
+mcl genus_edges.tsv -te 8 -I 2.0 --abc -o genus_clusters.txt
+mcl family_edges.tsv -te 8 -I 1.2 --abc -o family_clusters.txt
+
+##Find host
+ncbi-genome-download --taxids my_taxids.txt bacteria --formats fasta -P
+cd /media/home/xutiansong/data_output/oralhost/VirHostMatcher-master/test3/zong/hostrefpg/refseq/bacteria
+
+find . -maxdepth 1 -type d | wc -l 
+find . -mindepth 1 -maxdepth 1 -type d >folders.txt 
+
+mv */* ./ 
+mv folders.txt /media/home/xutiansong/data_output/oralhost/VirHostMatcher-master/test3/zong
+
+cat /media/home/xutiansong/data_output/oralhost/VirHostMatcher-master/test3/zong/hostrefpg/refseq/bacteria/folders.txt | while read folder;do rm -rf /media/home/xutiansong/data_output/oralhost/VirHostMatcher-master/test3/zong/hostrefpg/refseq/bacteria/$folder ;done
+
+rm -rf MD5SUMS
+rm -rf folders.txt
+
+ls /media/home/xutiansong/data_output/oralhost/VirHostMatcher-master/test3/zong/hostrefpg/refseq/bacteria >contig.txt
+cd /media/home/xutiansong/data_output/oralhost/VirHostMatcher-master
+
+screen r oralhost
+python vhm.py -v test3/zong/virus -b test3/zong/hostrefpg/refseq/bacteria -o test3/zong/output1 -t test3/zong/hostTaxapg.txt
+screen r oralhost1
+python vhm.py -v test3/zong/virus1 -b test3/zong/hostrefpg/refseq/bacteria -o test3/zong/output2 -t test3/zong/hostTaxapg.txt
+screen r oralhost2
+python vhm.py -v test3/zong/virus2 -b test3/zong/hostrefpg/refseq/bacteria -o test3/zong/output3 -t test3/zong/hostTaxapg.txt
+screen r oralhost3
+python vhm.py -v test3/zong/virus3 -b test3/zong/hostrefpg/refseq/bacteria -o test3/zong/output4 -t test3/zong/hostTaxapg.txt
+screen r oralhost4
+python vhm.py -v test3/zong/virus4 -b test3/zong/hostrefpg/refseq/bacteria -o test3/zong/output5 -t test3/zong/hostTaxapg.txt
+screen r oralhost5
+python vhm.py -v test3/zong/virus5 -b test3/zong/hostrefpg/refseq/bacteria -o test3/zong/output6 -t test3/zong/hostTaxapg.txt
