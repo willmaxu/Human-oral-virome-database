@@ -11,36 +11,16 @@ Download
 
 | Dataset | File | Size | Download Link |
 |---------|------|------|---------------|
-| **Human Oral Virome Database (HOVD)** | HOVD-geneseqences.fasta | 1020.3 MB | [Link](通过网盘分享的文件：HOVD-geneseqences.fasta
-链接: https://pan.baidu.com/s/1rflJowDQxpFINrCxNZrtbg 提取码: 51pw 
---来自百度网盘超级会员v8的分享) |
-|  | HOVD-proteinseqences.faa | 474.3 MB | [Link](通过网盘分享的文件：HOVD-proteinseqences.faa
-链接: https://pan.baidu.com/s/1rylSzYK55s2G9YoGIRVoPw 提取码: k5gw 
---来自百度网盘超级会员v8的分享) |
-|  | HOVD-annotations.xlsx | 2.37 MB | [Link](通过网盘分享的文件：HOVD-annotations.xlsx
-链接: https://pan.baidu.com/s/16WGViMWseXAMHQGT378VdA 提取码: pbmx 
---来自百度网盘超级会员v8的分享) |
-| **Human Oral Phage Database (OPD)** | OPD-geneseqences.fasta | 1015.4 MB | [Link](通过网盘分享的文件：OPD-geneseqences.fasta
-链接: https://pan.baidu.com/s/1nJpeq-uD2OH6ULESW_QTfA 提取码: 73qd 
---来自百度网盘超级会员v8的分享) |
-|  | OPD-proteinseqences.faa | 472.6 MB | [Link](通过网盘分享的文件：OPD-proteinseqences.faa
-链接: https://pan.baidu.com/s/1dQvNGO5-WbpUmlJK5x8knA 提取码: egmm 
---来自百度网盘超级会员v8的分享) |
-|  | OPD-annotations.xlsx | 2.36 MB | [Link](通过网盘分享的文件：OPD-annotations.xlsx
-链接: https://pan.baidu.com/s/1aLZ58U50nPDK91uBZQOVfA 提取码: 9kpm 
---来自百度网盘超级会员v8的分享) |
-|  | OPD-host.xlsx | 940 KB | [Link](通过网盘分享的文件：OPD-host.xlsx
-链接: https://pan.baidu.com/s/1G8EeuD1RUkwvQacjorgrJw 提取码: dnnt 
---来自百度网盘超级会员v8的分享) |
-| **Human Oral Eukaryotic Virus Database (OED)** | OED-geneseqences.fasta | 4.8 MB | [Link](通过网盘分享的文件：OED-geneseqences.fasta
-链接: https://pan.baidu.com/s/189LF6m-2pcbE1vhUP6tEfw 提取码: 7arf 
---来自百度网盘超级会员v8的分享) |
-|  | OED-proteinseqences.faa | 1.7 MB | [Link](通过网盘分享的文件：OED-proteinseqences.faa
-链接: https://pan.baidu.com/s/11hSV568PhmVSZNqIqcVguw 提取码: 5dkv 
---来自百度网盘超级会员v8的分享) |
-|  | OED-annotations.xlsx | 17 KB | [Link](通过网盘分享的文件：OED-annotations.xlsx
-链接: https://pan.baidu.com/s/1ceK02f9019affGLfQ2TC-w 提取码: nfef 
---来自百度网盘超级会员v8的分享) |
+| **Human Oral Virome Database (HOVD)** | HOVD-geneseqences.fasta | 1020.3 MB | [Link](https://pan.baidu.com/s/1rflJowDQxpFINrCxNZrtbg 提取码: 51pw) |
+|  | HOVD-proteinseqences.faa | 474.3 MB | [Link](https://pan.baidu.com/s/1rylSzYK55s2G9YoGIRVoPw 提取码: k5gw) |
+|  | HOVD-annotations.xlsx | 2.37 MB | [Link](https://pan.baidu.com/s/16WGViMWseXAMHQGT378VdA 提取码: pbmx) |
+| **Human Oral Phage Database (OPD)** | OPD-geneseqences.fasta | 1015.4 MB | [Link](https://pan.baidu.com/s/1nJpeq-uD2OH6ULESW_QTfA 提取码: 73qd) |
+|  | OPD-proteinseqences.faa | 472.6 MB | [Link](https://pan.baidu.com/s/1dQvNGO5-WbpUmlJK5x8knA 提取码: egmm) |
+|  | OPD-annotations.xlsx | 2.36 MB | [Link](https://pan.baidu.com/s/1aLZ58U50nPDK91uBZQOVfA 提取码: 9kpm) |
+|  | OPD-host.xlsx | 940 KB | [Link](https://pan.baidu.com/s/1G8EeuD1RUkwvQacjorgrJw 提取码: dnnt) |
+| **Human Oral Eukaryotic Virus Database (OED)** | OED-geneseqences.fasta | 4.8 MB | [Link](https://pan.baidu.com/s/189LF6m-2pcbE1vhUP6tEfw 提取码: 7arf) |
+|  | OED-proteinseqences.faa | 1.7 MB | [Link](https://pan.baidu.com/s/11hSV568PhmVSZNqIqcVguw 提取码: 5dkv) |
+|  | OED-annotations.xlsx | 17 KB | [Link](https://pan.baidu.com/s/1ceK02f9019affGLfQ2TC-w 提取码: nfef) |
 
 
 Related Websites
