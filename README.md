@@ -1,4 +1,7 @@
 # 🦠 Human Oral Virome Database (HOVD)
+<p align="center">
+  <img src="assets/banner.png" alt="Human Oral Virome Database Banner" width="100%">
+</p>
 
 ## 📖 Introduction
 A large-scale data mining of **3,024 oral metagenomes** were obtained from **nine countries** across **four continents**, leading to the identification of **24,440 oral phage OTUs** and **83 oral eukaryotic viral genomes** (all with completeness >50%).  
