@@ -32,7 +32,6 @@ We utilized these oral viral genomes to create the **Human Oral Virome Database 
 |  | OED-proteinseqences.faa | 1.7 MB | [🔗 Link](https://pan.baidu.com/s/11hSV568PhmVSZNqIqcVguw) `Code: 5dkv` |
 |  | OED-annotations.xlsx | 17 KB | [🔗 Link](https://pan.baidu.com/s/1ceK02f9019affGLfQ2TC-w) `Code: nfef` |
 
----
 📌 The full dataset is also archived on **Zenodo**: [https://doi.org/10.5281/zenodo.17143670](https://doi.org/10.5281/zenodo.17143670)
 ---
 
